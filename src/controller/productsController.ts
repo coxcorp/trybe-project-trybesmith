@@ -7,12 +7,13 @@ export default class ProductsController {
   // Requisito 01 - Crie um endpoint para a listagem de produtos
   public async getAll(req: Request, res: Response) {
     const result = await this.ProductsServices.getAll();
-    res.status(200).json(result);
+    return res.status(200).json(result);
   }
 
   // Requisito 02 - Crie um endpoint para o cadastro de produtos
   public async create(req: Request, res: Response) {
     const result = await this.ProductsServices.create(req.body);
-    return res.status(201).json({ item: result });
+    const test = { item: result };
+    return res.status(201).json(test);
   }
 }
