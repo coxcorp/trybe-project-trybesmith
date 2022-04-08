@@ -1,12 +1,25 @@
 import { IProduct } from '../interfaces/productsInterfaces';
-import productsModel from '../models/productsModel';
+import ProductsModel from '../models/productsModel';
+import connection from '../models/connection';
 
-const getAll = async (): Promise<IProduct[]> => {
-  const result = await productsModel.getAll();
+export default class ProductService {
+  private ProductsModel: ProductsModel;
 
-  return result;
-};
+  constructor() {
+    this.ProductsModel = new ProductsModel(connection);
+  }
 
-export default {
-  getAll,
-};
+  // Requisito 01 - Crie um endpoint para a listagem de produtos
+  public async getAll(): Promise<IProduct[]> {
+    const result = await this.ProductsModel.getAll();
+
+    return result;
+  }
+
+  // Requisito 02 - Crie um endpoint para o cadastro de produtos
+  public async create(product: IProduct): Promise<IProduct> { 
+    const newProduct = await this.ProductsModel.create(product);
+    
+    return newProduct;
+  }
+}
