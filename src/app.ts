@@ -1,5 +1,6 @@
 import express from 'express';
 import productsController from './controller/productsController';
+import ordersController from './controller/ordersController';
 
 const app = express();
 
@@ -11,6 +12,6 @@ app.get('/products', productsController.getAll);
 // Requisito 03 - Crie um endpoint para o cadastro de pessoas usuárias
 // app.post('/users');
 // Requisito 04 - Crie um endpoint para listar todos os pedidos
-// app.get('/orders');
+app.get('/orders', ordersController.getAll);
 
 export default app;
