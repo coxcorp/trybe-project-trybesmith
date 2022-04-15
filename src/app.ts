@@ -13,6 +13,6 @@ app.use('/users', router.usersRouter);
 // Requisito 06 - Crie um endpoint para o cadastro de um pedido
 app.use('/orders', router.ordersRouter);
 // Requisito 05 - Crie um endpoint para o login de pessoas usuárias
-// app.use('/login', router.loginRouter);
+app.use('/login', router.loginRouter);
 
 export default app;
