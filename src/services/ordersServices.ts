@@ -1,12 +1,18 @@
 import { IOrder } from '../interfaces/ordersInterfaces';
-import ordersModel from '../models/ordersModel';
+import OrdersModel from '../models/ordersModel';
+import connection from '../models/connection';
 
-const getAll = async (): Promise<IOrder[]> => {
-  const result = await ordersModel.getAll();
+export default class OrdersServices {
+  private OrdersModel: OrdersModel;
 
-  return result;
-};
+  constructor() {
+    this.OrdersModel = new OrdersModel(connection);
+  }
 
-export default {
-  getAll,
-};
+  // Requisito 04 - Crie um endpoint para listar todos os pedidos
+  public async getAll(): Promise<IOrder[]> {
+    const result = await this.OrdersModel.getAll();
+
+    return result;
+  }
+}

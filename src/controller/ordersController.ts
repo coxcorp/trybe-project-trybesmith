@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import ordersServices from '../services/ordersServices';
+import OrdersServices from '../services/ordersServices';
 
-const getAll = async (req: Request, res: Response) => {
-  const result = await ordersServices.getAll();
-  return res.status(200).json(result);
-};
+export default class OrdersController {
+  private OrdersServices: OrdersServices = new OrdersServices();
 
-export default {
-  getAll,
-};
+  // Requisito 04 - Crie um endpoint para listar todos os pedidos
+  public async getAll(req: Request, res: Response) {
+    const result = await this.OrdersServices.getAll();
+    return res.status(200).json(result);
+  }
+}

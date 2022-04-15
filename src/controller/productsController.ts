@@ -13,7 +13,6 @@ export default class ProductsController {
   // Requisito 02 - Crie um endpoint para o cadastro de produtos
   public async create(req: Request, res: Response) {
     const result = await this.ProductsServices.create(req.body);
-    const test = { item: result };
-    return res.status(201).json(test);
+    return res.status(201).json({ item: result });
   }
 }

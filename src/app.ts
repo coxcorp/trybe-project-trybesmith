@@ -1,16 +1,18 @@
 import express from 'express';
-import ordersController from './controller/ordersController';
-import productsRouter from './routes/productsRouter';
+import router from './routes';
 
 const app = express();
 
 app.use(express.json());
 // Requisito 01 - Crie um endpoint para a listagem de produtos
 // Requisito 02 - Crie um endpoint para o cadastro de produtos
-app.use('/products', productsRouter);
+app.use('/products', router.productsRouter);
 // Requisito 03 - Crie um endpoint para o cadastro de pessoas usuárias
-// app.post('/users');
+app.use('/users', router.usersRouter);
 // Requisito 04 - Crie um endpoint para listar todos os pedidos
-app.get('/orders', ordersController.getAll);
+// Requisito 06 - Crie um endpoint para o cadastro de um pedido
+app.use('/orders', router.ordersRouter);
+// Requisito 05 - Crie um endpoint para o login de pessoas usuárias
+// app.use('/login', router.loginRouter);
 
 export default app;
