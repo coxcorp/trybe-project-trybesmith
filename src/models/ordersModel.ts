@@ -1,4 +1,4 @@
-import { Pool, RowDataPacket } from 'mysql2/promise';
+import { Pool, RowDataPacket, ResultSetHeader } from 'mysql2/promise';
 import { IOrder } from '../interfaces/ordersInterfaces';
 
 export default class OrdersModel {
@@ -22,5 +22,15 @@ export default class OrdersModel {
         Orders.id ORDER BY Orders.userId;`,
     );
     return result as IOrder[];
+  }
+
+  // Requisito 06 - Crie um endpoint para o cadastro de um pedido
+  public async create(userId: number): Promise<number> {
+    const [{ insertId }] = await this.connection.execute<ResultSetHeader>(
+      'INSERT INTO Trybesmith.Orders (userId) VALUES (?)',
+      [userId],
+    );
+
+    return insertId;
   }
 }

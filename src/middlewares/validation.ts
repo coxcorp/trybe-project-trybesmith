@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { isValidToken } from '../helpers/jwtVerify';
 
 export default class Validation {
   public nameValidation = (
@@ -105,6 +106,33 @@ export default class Validation {
     }
     if (password.length <= 7) {
       return res.status(422).send({ error: 'Password must be longer than 7 characters' });
+    }
+    next();
+  };
+
+  public tokenValidation = (
+    req: Request,
+    res: Response, 
+    next: NextFunction,
+  ) => {
+    const token = req.headers.authorization;
+    if (!token) return res.status(401).json({ error: 'Token not found' });
+    if (!isValidToken(token)) return res.status(401).json({ error: 'Invalid token' });
+    next();
+  };
+
+  public productValidation = (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    const { products } = req.body;
+    if (!products) return res.status(400).json({ error: 'Products is required' });
+    if (!Array.isArray(products)) {
+      return res.status(422).json({ error: 'Products must be an array of numbers' });
+    }
+    if (products.length === 0) {
+      return res.status(422).json({ error: 'Products can\'t be empty' });
     }
     next();
   };

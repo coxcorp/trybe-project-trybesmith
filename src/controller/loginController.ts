@@ -9,6 +9,7 @@ export default class LoginController {
     try {
       const result = await this.loginServices.login(req.body);
       if (!result) return res.status(401).json({ error: 'Username or password invalid' });
+
       return res.status(200).json(result);
     } catch (e) {
       next(e);

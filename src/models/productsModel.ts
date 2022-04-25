@@ -22,4 +22,12 @@ export default class ProductsModel {
     );
     return { id, ...product };
   }
+
+  // Requisito 06 - Crie um endpoint para o cadastro de um pedido
+  public async update(productId: number, orderId: number) {
+    await this.connection.execute<ResultSetHeader>(
+      'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?;',
+      [orderId, productId],
+    );
+  }
 } 
